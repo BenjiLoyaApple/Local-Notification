@@ -8,19 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		E4D874112BC02D130043B1BF /* LocalNotificationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D874102BC02D130043B1BF /* LocalNotificationApp.swift */; };
-		E4D874132BC02D130043B1BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D874122BC02D130043B1BF /* ContentView.swift */; };
+		E4D874132BC02D130043B1BF /* NotificationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D874122BC02D130043B1BF /* NotificationsListView.swift */; };
 		E4D874152BC02D140043B1BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4D874142BC02D140043B1BF /* Assets.xcassets */; };
 		E4D874182BC02D140043B1BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4D874172BC02D140043B1BF /* Preview Assets.xcassets */; };
 		E4D874212BC02EC20043B1BF /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D874202BC02EC20043B1BF /* LocalNotificationManager.swift */; };
+		E4D874242BC03A180043B1BF /* LocalNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D874232BC03A180043B1BF /* LocalNotificationModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E4D8740D2BC02D130043B1BF /* LocalNotification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalNotification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D874102BC02D130043B1BF /* LocalNotificationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationApp.swift; sourceTree = "<group>"; };
-		E4D874122BC02D130043B1BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E4D874122BC02D130043B1BF /* NotificationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsListView.swift; sourceTree = "<group>"; };
 		E4D874142BC02D140043B1BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4D874172BC02D140043B1BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E4D874202BC02EC20043B1BF /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
+		E4D874232BC03A180043B1BF /* LocalNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +57,8 @@
 			children = (
 				E4D8741E2BC02EA20043B1BF /* App */,
 				E4D8741F2BC02EB10043B1BF /* Managers */,
-				E4D874122BC02D130043B1BF /* ContentView.swift */,
+				E4D874122BC02D130043B1BF /* NotificationsListView.swift */,
+				E4D874222BC03A040043B1BF /* Model */,
 				E4D874142BC02D140043B1BF /* Assets.xcassets */,
 				E4D874162BC02D140043B1BF /* Preview Content */,
 			);
@@ -84,6 +87,14 @@
 				E4D874202BC02EC20043B1BF /* LocalNotificationManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		E4D874222BC03A040043B1BF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E4D874232BC03A180043B1BF /* LocalNotificationModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,7 +168,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4D874212BC02EC20043B1BF /* LocalNotificationManager.swift in Sources */,
-				E4D874132BC02D130043B1BF /* ContentView.swift in Sources */,
+				E4D874132BC02D130043B1BF /* NotificationsListView.swift in Sources */,
+				E4D874242BC03A180043B1BF /* LocalNotificationModel.swift in Sources */,
 				E4D874112BC02D130043B1BF /* LocalNotificationApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

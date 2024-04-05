@@ -14,7 +14,7 @@ struct LocalNotificationApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NotificationsListView()
                 .environmentObject(lnManager)
         }
     }
