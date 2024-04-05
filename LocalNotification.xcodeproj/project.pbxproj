@@ -11,6 +11,7 @@
 		E4D874132BC02D130043B1BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D874122BC02D130043B1BF /* ContentView.swift */; };
 		E4D874152BC02D140043B1BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4D874142BC02D140043B1BF /* Assets.xcassets */; };
 		E4D874182BC02D140043B1BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4D874172BC02D140043B1BF /* Preview Assets.xcassets */; };
+		E4D874212BC02EC20043B1BF /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D874202BC02EC20043B1BF /* LocalNotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		E4D874122BC02D130043B1BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E4D874142BC02D140043B1BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4D874172BC02D140043B1BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E4D874202BC02EC20043B1BF /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +53,8 @@
 		E4D8740F2BC02D130043B1BF /* LocalNotification */ = {
 			isa = PBXGroup;
 			children = (
-				E4D874102BC02D130043B1BF /* LocalNotificationApp.swift */,
+				E4D8741E2BC02EA20043B1BF /* App */,
+				E4D8741F2BC02EB10043B1BF /* Managers */,
 				E4D874122BC02D130043B1BF /* ContentView.swift */,
 				E4D874142BC02D140043B1BF /* Assets.xcassets */,
 				E4D874162BC02D140043B1BF /* Preview Content */,
@@ -65,6 +68,22 @@
 				E4D874172BC02D140043B1BF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E4D8741E2BC02EA20043B1BF /* App */ = {
+			isa = PBXGroup;
+			children = (
+				E4D874102BC02D130043B1BF /* LocalNotificationApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		E4D8741F2BC02EB10043B1BF /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				E4D874202BC02EC20043B1BF /* LocalNotificationManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4D874212BC02EC20043B1BF /* LocalNotificationManager.swift in Sources */,
 				E4D874132BC02D130043B1BF /* ContentView.swift in Sources */,
 				E4D874112BC02D130043B1BF /* LocalNotificationApp.swift in Sources */,
 			);
