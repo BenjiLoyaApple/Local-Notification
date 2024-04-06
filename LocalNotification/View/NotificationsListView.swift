@@ -17,7 +17,6 @@ struct NotificationsListView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                
                 if lnManager.isGranted {
                     GroupBox("Shelude") {
                         Button("Interval Notification") {
@@ -28,9 +27,13 @@ struct NotificationsListView: View {
                                     body: "Some Body",
                                     timeInterval: 10,
                                     repeats: false) // if TRUE - min timeInterval = 60
+                                
+                                /// You can add this for calendar
                                 localNotification.subtitle = "This is a subtitle"
                                 localNotification.bundleImageName = "IMG_4349.JPG"
-                                await lnManager.schlude(locaNotification: localNotification)
+                                localNotification.userInfo = ["nextView" : NextView.renew.rawValue]
+                                localNotification.categoryIdentifier = "snooze"
+                                await lnManager.schedule(locaNotification: localNotification)
                             }
                         }
                         .buttonStyle(.bordered)
@@ -45,11 +48,29 @@ struct NotificationsListView: View {
                                         body: "Body calendar",
                                         dateComponents: dateComponents,
                                         repeats: false )
-                                    await lnManager.schlude(locaNotification: localNotification)
+                                    await lnManager.schedule(locaNotification: localNotification)
                                 }
                             }
                             .buttonStyle(.bordered)
                         }
+                        Button("Promo Offer") {
+                            Task {
+                                let dateComponents = DateComponents(
+                                    day: 1,
+                                    hour: 10,
+                                    minute: 0)
+                                var localNotification = LocalNotificationModel(
+                                    identifier: UUID().uuidString,
+                                    title: "Special Promotion",
+                                    body: "Take advantage of the monthly promotion",
+                                    dateComponents: dateComponents,
+                                    repeats: true)
+                                localNotification.bundleImageName = "IMG_4349.JPG"
+                                localNotification.userInfo = ["nextView" : NextView.promo.rawValue]
+                                await lnManager.schedule(locaNotification: localNotification)
+                            }
+                        }
+                        .buttonStyle(.bordered)
                     }
                     .frame(width: 300)
                     // List View Here
@@ -80,6 +101,10 @@ struct NotificationsListView: View {
                     .buttonStyle(.borderedProminent)
                 }
             }
+            .sheet(item: $lnManager.nextView, content: { nextView in
+                nextView.view()
+            })
+            
             .navigationTitle("Local Notifications")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

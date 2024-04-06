@@ -14,6 +14,7 @@
 		E4D874212BC02EC20043B1BF /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D874202BC02EC20043B1BF /* LocalNotificationManager.swift */; };
 		E4D874242BC03A180043B1BF /* LocalNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D874232BC03A180043B1BF /* LocalNotificationModel.swift */; };
 		E4D874272BC116560043B1BF /* IMG_4349.JPG in Resources */ = {isa = PBXBuildFile; fileRef = E4D874262BC116560043B1BF /* IMG_4349.JPG */; };
+		E4D874292BC11AF90043B1BF /* NextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D874282BC11AF90043B1BF /* NextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		E4D874202BC02EC20043B1BF /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		E4D874232BC03A180043B1BF /* LocalNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationModel.swift; sourceTree = "<group>"; };
 		E4D874262BC116560043B1BF /* IMG_4349.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_4349.JPG; sourceTree = "<group>"; };
+		E4D874282BC11AF90043B1BF /* NextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				E4D874122BC02D130043B1BF /* NotificationsListView.swift */,
+				E4D874282BC11AF90043B1BF /* NextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4D874212BC02EC20043B1BF /* LocalNotificationManager.swift in Sources */,
+				E4D874292BC11AF90043B1BF /* NextView.swift in Sources */,
 				E4D874132BC02D130043B1BF /* NotificationsListView.swift in Sources */,
 				E4D874242BC03A180043B1BF /* LocalNotificationModel.swift in Sources */,
 				E4D874112BC02D130043B1BF /* LocalNotificationApp.swift in Sources */,

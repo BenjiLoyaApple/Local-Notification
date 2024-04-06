@@ -9,26 +9,22 @@ import SwiftUI
 import NotificationCenter
 
 @MainActor
-class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
+class LocalNotificationManager: NSObject, ObservableObject {
    let notificationCenter = UNUserNotificationCenter.current()
     
     @Published var isGranted = false
     @Published var pendingRequests: [UNNotificationRequest] = []
+    @Published var nextView: NextView?
     
     override init() {
         super .init()
         notificationCenter.delegate = self
     }
     
-    // Delegate function - for show notification when you in app
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions{
-       await getPendingRequests()
-        return [.sound, .banner]
-    }
-    
     func requestAuthorization() async throws {
         try await notificationCenter
             .requestAuthorization(options: [.sound, .badge, .alert])
+        registerActions()
         await getCurrentSettings()
     }
     
@@ -49,7 +45,7 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
         }
     }
     
-    func schlude(locaNotification: LocalNotificationModel) async {
+    func schedule(locaNotification: LocalNotificationModel) async {
         let content = UNMutableNotificationContent()
         content.title = locaNotification.title
         content.body = locaNotification.body
@@ -63,7 +59,12 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
                 }
             }
         }
-        
+        if let userInfo = locaNotification.userInfo {
+            content.userInfo = userInfo
+        }
+        if let categoryIdentifier = locaNotification.categoryIdentifier {
+            content.categoryIdentifier = categoryIdentifier
+        }
         
         content.sound = .default
         if locaNotification.scheduleType == .time {
@@ -110,5 +111,52 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
         print("Pending: \(pendingRequests.count)")
     }
     
+}
+
+extension LocalNotificationManager: UNUserNotificationCenterDelegate {
     
+    func registerActions() {
+        let snooze10Action = UNNotificationAction(identifier: "snooze10", title: "Snooze 10 seconds")
+        let snooze60Action = UNNotificationAction(identifier: "snooze60", title: "Snooze 60 seconds")
+        let snoozeCategory = UNNotificationCategory(identifier: "snooze", actions: [snooze10Action, snooze60Action], intentIdentifiers: [])
+        notificationCenter.setNotificationCategories([snoozeCategory])
+    }
+    
+    // Delegate function - for show notification when you in app
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions{
+       await getPendingRequests()
+        return [.sound, .banner]
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+        if let value = response.notification.request.content.userInfo["nextView"] as? String {
+            nextView = NextView(rawValue: value)
+        }
+        
+        // Respond to snooze action
+        var snoozeInterval: Double?
+        if response.actionIdentifier == "snooze10" {
+            snoozeInterval = 10
+        } else {
+            if response.actionIdentifier == "snooze60" {
+                snoozeInterval = 60
+            }
+        }
+        
+        if let snoozeInterval = snoozeInterval {
+            let content = response.notification.request.content
+            let newContent = content.mutableCopy() as! UNMutableNotificationContent
+            let newTrigger = UNTimeIntervalNotificationTrigger(timeInterval: snoozeInterval, repeats: false)
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: newContent, trigger: newTrigger)
+           
+            do {
+                try? await notificationCenter.add(request)
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+            await getPendingRequests()
+        }
+        
+    }
 }

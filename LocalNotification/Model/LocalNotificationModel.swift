@@ -50,7 +50,9 @@ struct LocalNotificationModel {
     var body: String
     var subtitle: String?
     var bundleImageName: String?
+    var userInfo: [AnyHashable : Any]?
     var timeInterval: Double?
     var dateComponents: DateComponents?
     var repeats: Bool
+    var categoryIdentifier: String?
 }
