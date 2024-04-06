@@ -53,17 +53,41 @@ class LocalNotificationManager: NSObject, ObservableObject, UNUserNotificationCe
         let content = UNMutableNotificationContent()
         content.title = locaNotification.title
         content.body = locaNotification.body
+        if let subtitle = locaNotification.subtitle {
+            content.subtitle = subtitle
+        }
+        if let bundleImageName = locaNotification.bundleImageName {
+            if let url = Bundle.main.url(forResource: bundleImageName, withExtension: "") {
+                if let attachment = try? UNNotificationAttachment(identifier: bundleImageName, url: url) {
+                    content.attachments = [attachment]
+                }
+            }
+        }
+        
+        
         content.sound = .default
-        let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: locaNotification.timeInterval,
-            repeats: locaNotification.repeats
-        )
-        let request = UNNotificationRequest(
-            identifier: locaNotification.identifier,
-            content: content,
-            trigger: trigger
-        )
-        try? await notificationCenter.add(request)
+        if locaNotification.scheduleType == .time {
+            guard let timeInterval = locaNotification.timeInterval else { return }
+            let trigger = UNTimeIntervalNotificationTrigger(
+                timeInterval: timeInterval,
+                repeats: locaNotification.repeats
+            )
+            let request = UNNotificationRequest(
+                identifier: locaNotification.identifier,
+                content: content,
+                trigger: trigger
+            )
+            try? await notificationCenter.add(request)
+        } else {
+            guard let dateComponents = locaNotification.dateComponents else { return }
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: locaNotification.repeats)
+            let request = UNNotificationRequest(
+                identifier: locaNotification.identifier,
+                content: content,
+                trigger: trigger
+            )
+            try? await notificationCenter.add(request)
+        }
         await getPendingRequests()
     }
     

@@ -12,6 +12,8 @@ struct NotificationsListView: View {
     @EnvironmentObject var lnManager: LocalNotificationManager
     @Environment(\.scenePhase) var scenePhase
     
+    @State private var scheduleDate = Date()
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -20,21 +22,34 @@ struct NotificationsListView: View {
                     GroupBox("Shelude") {
                         Button("Interval Notification") {
                             Task {
-                                let localNotification = LocalNotificationModel(
+                                var localNotification = LocalNotificationModel(
                                     identifier: UUID().uuidString,
                                     title: "Some Title",
                                     body: "Some Body",
-                                    timeInterval: 60,
-                                    repeats: true)
+                                    timeInterval: 10,
+                                    repeats: false) // if TRUE - min timeInterval = 60
+                                localNotification.subtitle = "This is a subtitle"
+                                localNotification.bundleImageName = "IMG_4349.JPG"
                                 await lnManager.schlude(locaNotification: localNotification)
                             }
                         }
                         .buttonStyle(.bordered)
-                        
-                        Button("Calendar Notification") {
-                            
+                        GroupBox {
+                            DatePicker("", selection: $scheduleDate)
+                            Button("Calendar Notification") {
+                                Task {
+                                    let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: scheduleDate)
+                                    let localNotification = LocalNotificationModel(
+                                        identifier: UUID().uuidString,
+                                        title: "Caalendar Notification",
+                                        body: "Body calendar",
+                                        dateComponents: dateComponents,
+                                        repeats: false )
+                                    await lnManager.schlude(locaNotification: localNotification)
+                                }
+                            }
+                            .buttonStyle(.bordered)
                         }
-                        .buttonStyle(.bordered)
                     }
                     .frame(width: 300)
                     // List View Here
